@@ -68,18 +68,6 @@ body {
 }
 body.loaded-doc {opacity: 1;}
 
-
-#animate-me {
-  width: 240px;
-  height: 80px;
-  position: absolute;  
-  --delay-anim: 2s;
-  left: 40vw;
-  top: 10vw;
-  background-color: #fff;
-  z-index: 400;
-}
-
 @keyframes glitch-1 {
  0% {
      opacity: 1;
