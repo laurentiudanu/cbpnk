@@ -16,10 +16,11 @@ ready(() => {
 	const sideMsg = ["I am not worthy", "I am alive?", "You are going to die here", "You are worthless", "Where is thy God now?", "Shut up!", "I am emptiness", "You are worthless", "Ha ha ha!", "I am God!", "Kill yourself!", "Scream. I want to hear you scream", "I stink"]
 	
 	let start;
-	var trigger1 = false;
+	var trigger1;
 	var rndVal = 0;
 	var randM;
 	var docWrapper = document.querySelector(".main");
+	var interval = null;
 	
 	function mcTimer(message, timer) {
     g_timer = window.setTimeout(function() {
@@ -39,39 +40,73 @@ ready(() => {
     }, timer);	
   }
 
-  // trigger random message after a random period of time picked from a specific range
+  function actionListener() {
+		if(trigger1 === "true") {
+    	console.log("Success: Trigger 1 is true!");
+    	genMsg();
+    }
+    else {
+    	console.info("no trigger defined");
+    }
+	}
+	 
+	function resetListener() {
+		if(interval) {
+		  clearInterval(interval);
+		}
+	}
+
+  function genMsg() {
+  	if(trigger1 != "false") {
+			trigger1 = "false";
+  	}
+  	var gmrand = getRandomInt(3400, 8000);
+   setInterval(function() {
+	   	var randMsg = getRandomInt(0, sideMsg.length);
+			let voicesW = document.createElement('p');
+			if(document.querySelector(".voices")){
+				document.querySelector(".voices").remove();
+			}
+			voicesW.textContent = sideMsg[randMsg];
+			voicesW.classList.add("voices");
+			voicesW.setAttribute("data-text", sideMsg[randMsg]);
+			docWrapper.appendChild(voicesW); 
+		}, gmrand);
+  }
+
+
+	// function catchMe() {
+	// 	if(trigger1 === "true") {
+ //    	console.log("Success: Trigger 1 is true!");
+ //    	genMsg();
+ //    }
+ //  	window.requestAnimationFrame(catchMe);
+	// }
+
+
+	interval = setInterval(actionListener, 1100);
+
 	document.querySelector(".trigger-1").addEventListener("click", (e) => {
 		console.log("button #1 clicked...action next");
-		var trigger1 = true;
-		var rndVal = getRandomInt(2400, 4400);
-		var randM = getRandomInt(0, sideMsg.length);
-		mcTimer(randM, rndVal);
+		if(trigger1 != "true") {
+			trigger1 = "true";	
+		}
+		else {
+			trigger1 = "false";
+		}
+		
+		// var rndVal = getRandomInt(2400, 4400);
+		// var randM = getRandomInt(0, sideMsg.length);
+		// mcTimer(randM, rndVal);
 		e.preventDefault();
 	});
 	document.querySelector(".trigger-2").addEventListener("click", (e) => {
-		var rndVal = getRandomInt(3400, 5400);
-		var randM = getRandomInt(0, sideMsg.length);
+		rndVal = getRandomInt(3400, 5400);
+		randM = getRandomInt(0, sideMsg.length);
 		mcTimer(randM, rndVal);
 		e.preventDefault();
 	});
 
-	
-
-	
-
-	// function step(timestamp) {
-	// 	if (start === undefined) {
-	// 		start = timestamp;
-	// 	}
-	// 	const elapsed = timestamp - start;
-	// 	//elta.style.transform = 'translateX('+Math.min(0.1 * elapsed, 200)+'px)';
-	// 	if (elapsed < 200) {
-	
-	// 	}
-	// 	window.requestAnimationFrame(step);
-	// }
-
-	// window.requestAnimationFrame(step);
-   // }
-
+	// window.requestAnimationFrame(catchMe);
+  
 });
