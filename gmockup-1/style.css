@@ -96,6 +96,18 @@ body.loaded-doc {opacity: 1;}
   background-attachment: scroll;
   background-size: 100%;
 }
+.darker:after {
+  display: block;
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%);
+  background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+  background: radial-gradient(ellipse at center,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+}
 .fade-in {opacity: 0; animation-name: frame-fade-in;}
 .fade-out {opacity: 1; animation-name: frame-fade-out;}
 .one-time {
